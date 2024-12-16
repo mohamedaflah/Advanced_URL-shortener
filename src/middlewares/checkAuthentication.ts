@@ -23,8 +23,10 @@ export const checkAuthentication = (
     res.status(401).json({ message: "Something went wrong" });
     return;
   }
-  if (req && req?.user) {
-    (req.user as any)._id = _id as any;
+
+  if (req) {
+    let userId = { _id: _id };
+    (req.user as any) = userId;
   }
   next();
 };

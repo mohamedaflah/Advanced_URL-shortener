@@ -21,6 +21,13 @@ export interface IUrl extends Document {
     uniqueClicks: number;
     uniqueUsers: number;
   };
+  clicksByDate: [
+    {
+      date: string | Date;
+      count: number;
+    }
+  ];
+  uniqueIp: string[];
 }
 
 const UrlSchema: Schema<IUrl> = new Schema<IUrl>(
@@ -30,7 +37,6 @@ const UrlSchema: Schema<IUrl> = new Schema<IUrl>(
     topic: { type: String },
     shortUrl: { type: String, required: true },
     totalClick: { type: Number, default: 0 },
-    uniqueClicks: { type: Number, default: 0 },
     os: {
       osName: { type: String },
       osType: { type: String },
@@ -43,6 +49,8 @@ const UrlSchema: Schema<IUrl> = new Schema<IUrl>(
       uniqueClicks: { type: Number, default: 0 },
       uniqueUsers: { type: Number, default: 0 },
     },
+    clicksByDate: [{ date: Date, count: { type: Number, default: 0 } }],
+    uniqueIp: [{ type: String }],
   },
   { timestamps: true }
 );

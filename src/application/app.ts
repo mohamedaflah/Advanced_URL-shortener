@@ -14,7 +14,7 @@ app.use(`/api-docs`, swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 // api routes =>
 
 app.use(`/api/auth`, authRouter);
-app.use(`/api/url`, urlRoute);
+app.use(`/api/shortner`, urlRoute);
 
 app.use(errorHandler);
 export default app.listen(process.env.APP_PORT!, async () => {

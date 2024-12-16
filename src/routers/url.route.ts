@@ -6,7 +6,7 @@ import { checkAuthentication } from "../middlewares/checkAuthentication";
 const urlRoute = Router();
 
 urlRoute.post(
-  `/shorten`,
+  `/`,
   rateLimitMiddleware,
   checkAuthentication,
   shortUrlController
