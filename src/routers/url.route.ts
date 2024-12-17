@@ -64,7 +64,70 @@ urlRoute.post(
   shortUrlController
 );
 
+/**
+ * @swagger
+ * /api/shortner/analytics/overall:
+ *   get:
+ *     summary: Retrieve analytics based on user
+ *     tags: [URL shortener]
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved URL analytics based on user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   os:
+ *                     type: object
+ *                     properties:
+ *                       osName:
+ *                         type: string
+ *                         example: Windows
+ *                       osType:
+ *                         type: string
+ *                         example: 10
+ *                       uniqueClicks:
+ *                         type: number
+ *                         example: 1
+ *                       uniqueUsers:
+ *                         type: number
+ *                         example: 1
+ *                   device:
+ *                     type: object
+ *                     properties:
+ *                       deviceName:
+ *                         type: string
+ *                         example: Android
+ *                       deviceType:
+ *                         type: string
+ *                         example: 13
+ *                       uniqueClicks:
+ *                         type: number
+ *                         example: 1
+ *                       uniqueUsers:
+ *                         type: number
+ *                         example: 1
+ *                   shortUrl:
+ *                     type: string
+ *                     example: http://localhost:4200/api/shortner/git-8793
+ *                   totalClick:
+ *                     type: number
+ *                     example: 1
+ *                   uniqueClicks:
+ *                     type: number
+ *                     example: 1
+ *       302:
+ *         description: Redirect to the original URL
+ *       404:
+ *         description: Short URL not found
+ *       429:
+ *         description: Too many requests
+ */
 urlRoute.get(`/analytics/overall`, checkAuthentication, getOverallAnalytics);
+
 /**
  * @swagger
  * /api/shortner/analytics/topic/{topic}:

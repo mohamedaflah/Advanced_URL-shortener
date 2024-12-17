@@ -7,6 +7,15 @@ const swaggerDef = {
     version: "1.0.0",
     description: `A Advanced URL shortener Application`,
   },
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: "http",
+        scheme: "bearer",
+        bearerFormat: "JWT",
+      },
+    },
+  },
 };
 const swaggerOptions = {
   definition: swaggerDef,

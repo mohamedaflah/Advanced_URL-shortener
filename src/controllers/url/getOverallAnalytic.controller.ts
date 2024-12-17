@@ -12,7 +12,6 @@ export async function getOverallAnalytics(
     const analytics = await URlModel.find(
       { userId: userId },
       {
-        clicksByDate: false,
         topic: false,
         uniqueIp: false,
         _id: false,
