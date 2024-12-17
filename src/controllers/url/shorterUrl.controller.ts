@@ -3,6 +3,7 @@ import { CustomeError } from "../../utils/customeError";
 // import { createUniqueAlias } from "../../utils/createUniqueAlias";
 import { URlModel } from "../../models/url.model";
 import { UAParser } from "ua-parser-js";
+import { IUser } from "../../types/User";
 // import { nanoid } from "nanoid";
 export const shortUrlController = async (
   req: Request,
@@ -11,7 +12,6 @@ export const shortUrlController = async (
 ) => {
   try {
     let { url, alias, topic } = req.body;
-    console.log(req.user);
 
     // Validate URL
     if (!url || !/^https?:\/\/[^\s/$.?#].[^\s]*$/.test(url)) {
@@ -50,6 +50,7 @@ export const shortUrlController = async (
       shortUrl: `${process.env.BASE_URL!}/api/shortner/${alias}`,
       os: osInfo,
       device: deviceInfo,
+      userId: (req.user as IUser)?._id,
       shortId: shortId,
     });
     console.log({ alias, url, topic });

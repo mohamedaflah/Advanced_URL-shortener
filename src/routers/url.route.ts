@@ -5,6 +5,8 @@ import { rateLimitMiddleware } from "../middlewares/rateLimiter";
 import { checkAuthentication } from "../middlewares/checkAuthentication";
 import { getShortnerurlWithAlias } from "../controllers/url/shortnerUrlget.controller";
 import { getAnalyticsController } from "../controllers/url/getAnalaytics.controller";
+import { getTopicAnalyticController } from "../controllers/url/getTopicAnalytic.controller";
+import { getOverallAnalytics } from "../controllers/url/getOverallAnalytic.controller";
 
 const urlRoute = Router();
 /**
@@ -61,6 +63,82 @@ urlRoute.post(
   checkAuthentication,
   shortUrlController
 );
+
+urlRoute.get(`/analytics/overall`, checkAuthentication, getOverallAnalytics);
+/**
+ * @swagger
+ * /api/shortner/analytics/topic/{topic}:
+ *   get:
+ *     summary: Retrieve analytics of under specific topic
+ *     tags: [URL shortener]
+ *     parameters:
+ *       - in: path
+ *         name: topic
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Topic for URL analytics
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved URL analytics based on topic
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   os:
+ *                     type: object
+ *                     properties:
+ *                       osName:
+ *                         type: string
+ *                         example: Windows
+ *                       osType:
+ *                         type: string
+ *                         example: 10
+ *                       uniqueClicks:
+ *                         type: number
+ *                         example: 1
+ *                       uniqueUsers:
+ *                         type: number
+ *                         example: 1
+ *                   device:
+ *                     type: object
+ *                     properties:
+ *                       deviceName:
+ *                         type: string
+ *                         example: Android
+ *                       deviceType:
+ *                         type: string
+ *                         example: 13
+ *                       uniqueClicks:
+ *                         type: number
+ *                         example: 1
+ *                       uniqueUsers:
+ *                         type: number
+ *                         example: 1
+ *                   shortUrl:
+ *                     type: string
+ *                     example: http://localhost:4200/api/shortner/git-8793
+ *                   totalClick:
+ *                     type: number
+ *                     example: 1
+ *                   uniqueClicks:
+ *                     type: number
+ *                     example: 1
+ *       302:
+ *         description: Redirect to the original URL
+ *       404:
+ *         description: Short URL not found
+ *       429:
+ *         description: Too many requests
+ */
+urlRoute.get(
+  `/analytics/topic/:topic`,
+  checkAuthentication,
+  getTopicAnalyticController
+);
 /**
  * @swagger
  * /api/shortner/{alias}:
@@ -82,8 +160,12 @@ urlRoute.post(
  *       429:
  *         description: Too many requests
  */
-urlRoute.get("/:shortId", rateLimitMiddleware, getShortnerurlWithAlias);
-
+urlRoute.get(
+  "/:shortId",
+  rateLimitMiddleware,
+  // checkAuthentication,
+  getShortnerurlWithAlias
+);
 /**
  * @swagger
  * /api/shortner/{alias}/analytics:
@@ -151,5 +233,9 @@ urlRoute.get("/:shortId", rateLimitMiddleware, getShortnerurlWithAlias);
  *       429:
  *         description: Too many requests
  */
-urlRoute.get(`/:shortId/analytics`, getAnalyticsController);
+urlRoute.get(
+  `/:shortId/analytics`,
+  checkAuthentication,
+  getAnalyticsController
+);
 export default urlRoute;

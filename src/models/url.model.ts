@@ -8,6 +8,7 @@ export interface IUrl extends Document {
   shortId: string;
   createdAt?: Date;
   updatedAt?: Date;
+  userId: mongoose.Schema.Types.ObjectId;
   totalClick: number;
   uniqueClicks: number;
   os: {
@@ -40,6 +41,7 @@ const UrlSchema: Schema<IUrl> = new Schema<IUrl>(
     shortId: { type: String, unique: true },
     totalClick: { type: Number, default: 0 },
     uniqueClicks: { type: Number, default: 0 },
+    userId: { type: mongoose.Types.ObjectId },
     os: {
       osName: { type: String },
       osType: { type: String },
