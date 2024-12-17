@@ -11,9 +11,9 @@ Open Terminal and run the following commands
 1. `git clone https://github.com/mohamedaflah/Advanced_URL-shortener.git`
 
 2. create .env file in root of project directory and add .env data based .env.sample
-3. `npm install` `npm run dev`
+3. `docker compose up`
 
-4. Ensure env setup completed check .env.sample
+4. Ensure the environment setup is complete by verifying that all required environment variables are properly configured as per the `.env.sample` file, Docker is installed and running on your system, and all necessary dependencies and tools are installed and set up correctly.
 
 ###### Please email me the required .env file details at mohamedaflah186@gmail.com to proceed further. Let me know if you need any additional information from my side. Looking forward to your response!
 
