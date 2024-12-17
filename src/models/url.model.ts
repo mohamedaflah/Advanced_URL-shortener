@@ -5,6 +5,7 @@ export interface IUrl extends Document {
   alias: string;
   topic: string;
   shortUrl: string;
+  shortId: string;
   createdAt?: Date;
   updatedAt?: Date;
   totalClick: number;
@@ -36,7 +37,9 @@ const UrlSchema: Schema<IUrl> = new Schema<IUrl>(
     alias: { type: String, required: true },
     topic: { type: String },
     shortUrl: { type: String, required: true },
+    shortId: { type: String, unique: true },
     totalClick: { type: Number, default: 0 },
+    uniqueClicks: { type: Number, default: 0 },
     os: {
       osName: { type: String },
       osType: { type: String },
@@ -49,7 +52,7 @@ const UrlSchema: Schema<IUrl> = new Schema<IUrl>(
       uniqueClicks: { type: Number, default: 0 },
       uniqueUsers: { type: Number, default: 0 },
     },
-    clicksByDate: [{ date: Date, count: { type: Number, default: 0 } }],
+    clicksByDate: [{ date: String, count: { type: Number, default: 0 } }],
     uniqueIp: [{ type: String }],
   },
   { timestamps: true }

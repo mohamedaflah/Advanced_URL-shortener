@@ -4,11 +4,11 @@ import { swaggerSpec } from "../configurations/swagger.config";
 import { errorHandler } from "../middlewares/errorHandler";
 import authRouter from "../routers/auth.routes";
 import urlRoute from "../routers/url.route";
-
+import helmet from "helmet";
 const app = express();
 
 app.use(express.json());
-
+app.use(helmet());
 app.use(`/api-docs`, swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 // api routes =>

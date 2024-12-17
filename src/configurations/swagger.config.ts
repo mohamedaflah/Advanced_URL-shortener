@@ -1,15 +1,21 @@
 import swaggerJSDoc from "swagger-jsdoc";
+import path from "path";
 const swaggerDef = {
   openapi: "3.0.0",
   info: {
-    title: "url-shortner",
+    title: "URL shortener",
     version: "1.0.0",
-    description: "url shortener",
+    description: `A Advanced URL shortener Application`,
   },
 };
 const swaggerOptions = {
   definition: swaggerDef,
-  apis: ["../routers/*.ts"],
+  apis: [
+    path.resolve(__dirname, "../routers/*.ts"),
+    path.resolve(__dirname, "../routers/*.route.ts"),
+    path.resolve(__dirname, "../controllers/**/*.controller.ts"),
+  ],
 };
+
 const swaggerSpec = swaggerJSDoc({ ...swaggerOptions });
 export { swaggerSpec };
