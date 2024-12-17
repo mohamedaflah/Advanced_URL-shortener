@@ -2,6 +2,7 @@ import "dotenv/config";
 import "./configurations/mongoose.config";
 import server from "./application/app";
 import { connectRedis, disconnectRedis } from "./configurations/redis.config";
+// redis connection
 (async () => {
   try {
     await connectRedis();
