@@ -4,6 +4,7 @@ import { shortUrlController } from "../controllers/url/shorterUrl.controller";
 import { rateLimitMiddleware } from "../middlewares/rateLimiter";
 import { checkAuthentication } from "../middlewares/checkAuthentication";
 import { getShortnerurlWithAlias } from "../controllers/url/shortnerUrlget.controller";
+import { getAnalyticsController } from "../controllers/url/getAnalaytics.controller";
 
 const urlRoute = Router();
 /**
@@ -82,5 +83,73 @@ urlRoute.post(
  *         description: Too many requests
  */
 urlRoute.get("/:shortId", rateLimitMiddleware, getShortnerurlWithAlias);
-urlRoute.get(`/:shortId/analytics`)
+
+/**
+ * @swagger
+ * /api/shortner/{alias}/analytics:
+ *   get:
+ *     summary: Retrieve analytics of url based on given alias
+ *     tags: [URL shortener]
+ *     parameters:
+ *       - in: path
+ *         name: alias
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Short URL alias
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved URL analytics
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 os:
+ *                   type: object
+ *                   properties:
+ *                     osName:
+ *                       type: string
+ *                       example: Windows
+ *                     osType:
+ *                       type: string
+ *                       example: 10
+ *                     uniqueClicks:
+ *                       type: number
+ *                       example: 1
+ *                     uniqueUsers:
+ *                       type: number
+ *                       example: 1
+ *                 device:
+ *                   type: object
+ *                   properties:
+ *                     deviceName:
+ *                       type: string
+ *                       example: Android
+ *                     deviceType:
+ *                       type: string
+ *                       example: 13
+ *                     uniqueClicks:
+ *                       type: number
+ *                       example: 1
+ *                     uniqueUsers:
+ *                       type: number
+ *                       example: 1
+ *                 shortUrl:
+ *                   type: string
+ *                   example: http://localhost:4200/api/shortner/git-8793
+ *                 totalClick:
+ *                   type: number
+ *                   example: 1
+ *                 uniqueClicks:
+ *                   type: number
+ *                   example: 1
+ *       302:
+ *         description: Redirect to the original URL
+ *       404:
+ *         description: Short URL not found
+ *       429:
+ *         description: Too many requests
+ */
+urlRoute.get(`/:shortId/analytics`, getAnalyticsController);
 export default urlRoute;
