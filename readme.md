@@ -20,14 +20,23 @@ Open Terminal and run the following commands
 
 ###### Please email me the required .env file details at mohamedaflah186@gmail.com to proceed further. Let me know if you need any additional information from my side. Looking forward to your response!
 
+## step of authentication
+
+1. open http://localhost:4200/api/auth/google in browser
+
+2. select email
+
+3. copay token from response after completing authentication
+
+4. add this token in authentication header as Bearer token
+
+
 ## APi docs
 
 #### http://localhost:4200/api-docs
 
 ## Api docs with swagger
-
 ![Application workflow](./docs/api-doc.png)
 
 ## Application workflow
-
 ![Application workflow](./docs/flow-2.png)
