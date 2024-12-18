@@ -30,4 +30,4 @@ Open Terminal and run the following commands
 
 ## Application workflow
 
-![Application workflow](./docs/image.png)
+![Application workflow](./docs/flow-2.png)
