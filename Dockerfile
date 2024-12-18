@@ -10,7 +10,7 @@ RUN npm install
 # Copy the entire source code
 COPY . .
 
-# Initialize TypeScript configuration (if needed)
+# Initialize TypeScript configuration 
 RUN npx tsc --init
 
 # Build the TypeScript files
